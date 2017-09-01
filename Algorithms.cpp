@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 int peasant_divison_helper(int dividend, int divisor) {
     int tempResult = divisor;
     int quotient = 1;
@@ -40,8 +41,9 @@ int peasant_divison(int dividend, int divisor) {
     }
 
     return result;
-
 }
+
+
 
 // Number to Excel Column
 // 1->A
@@ -64,8 +66,10 @@ string num_to_excel(int num) {
     return result;
 }
 
+
+
 // Implementation of atoi
-// atoi basically converts a number as a string into an integer.
+// atoi converts a number as a string into an integer.
 // Think about test cases:
 // 183
 // 0
@@ -98,6 +102,8 @@ int atoi_manual(char* numStr) {
     return result;
 }
 
+
+
 // iterative inorder traversal of a binary tree
 void iter_inorder_traversal(TreeNode* head) {
     if (head == nullptr) return;
@@ -115,6 +121,8 @@ void iter_inorder_traversal(TreeNode* head) {
         }
     }
 }
+
+
 
 void merge(vector<int>& vec, vector<int>& helper, int low, int middle, int high) {
     // copy both halves into helper array
@@ -143,6 +151,7 @@ void merge(vector<int>& vec, vector<int>& helper, int low, int middle, int high)
     }
 }
 
+// Classic mergesort
 void mergesort(vector<int>& vec, vector<int>& helper, int low, int high) {
     if (low < high) {
         int middle = (low + high) / 2;
@@ -151,6 +160,8 @@ void mergesort(vector<int>& vec, vector<int>& helper, int low, int high) {
         merge(vec, helper, low, middle, high);
     }
 }
+
+
 
 // Hamming distance is the number of bits that differ between two numbers.
 int hammingDistance(int x, int y) {
