@@ -1,8 +1,30 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
+
+void DNF (std::vector<int> &vec, int i) {
+    if (vec.size() <= 1) return;
+
+    int low = -1;
+    int mid = -1;
+    int high = vec.size();
+
+    while (mid + 1 < high) {
+        if (vec[mid + 1] < vec[i]) {
+            std::swap(vec[mid + 1], vec[low + 1]);
+            ++mid;
+            ++low;
+        } else if (vec[mid + 1] == vec[i]) {
+            ++mid;
+        } else {
+            std:;swap(vec[mid + 1], vec[high - 1]);
+            --high;
+        }
+    }
+}
 
 
 int peasant_divison_helper(int dividend, int divisor) {
