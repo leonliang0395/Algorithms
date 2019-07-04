@@ -2,8 +2,33 @@
 #include <cstdlib>
 #include <algorithm>
 #include <vector>
+#include <pair>
 
 using namespace std;
+
+pair<pair<int, int>, int> maxContiguousSubarray(const vector<int> &arr) {
+    int maxSoFar = arr[0];
+    int maxNow = arr[0];
+    int start = 0;
+    int end = 0;
+    int currStart = 0;
+
+    for (int i = 0; i < arr.size(); ++i) {
+        maxNow = maxNow + arr[i];
+        if (maxNow < arr[i]) {
+            maxNow = arr[i];
+            currStart = i;
+        }
+
+        if (maxNow > maxSoFar) {
+            maxSoFar = maxNow;
+            start = currStart;
+            end = i;
+        }
+    }
+
+    return std::make_pair(std::make_pair(start, end), maxSoFar);
+}
 
 void DNF (std::vector<int> &vec, int i) {
     if (vec.size() <= 1) return;
