@@ -6,6 +6,21 @@
 
 using namespace std;
 
+void printCoinCombinations(const vector<int> &coins, int startIdx, int target, deque<int> &buffer, int currSum) {
+    // Termination Cases
+    if (currSum > target) return;
+
+    if (currSum == target) print(buffer);
+
+    // Find Candidates
+    // Loop through the remaining coins
+    for (int i = startIdx; i < coins.size(); ++i) {
+        buffer.push_front(coins[i]);
+        printCoinCombinations(coins, i, target, buffer, currSum + coins[i]);
+        buffer.pop_front(coins[i]);
+    }
+}
+
 pair<pair<int, int>, int> maxContiguousSubarray(const vector<int> &arr) {
     int maxSoFar = arr[0];
     int maxNow = arr[0];
