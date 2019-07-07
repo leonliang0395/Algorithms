@@ -1,0 +1,22 @@
+Deleting Nodes
+- Generally, if you want to delete a node in a singly linked list, you will need the previous node.
+    - This will take O(N) to figure out the previous node.
+    - If you can't live with the O(N) then what you can do is take the value of the next node into
+        your current node and delete the next node. However, this will not work if you try to delete
+        the last node because you need to set the previous node's pointer to null.
+
+Slow Pointer, Fast Pointer (Floyd's Algorithm)
+- Generally you'll use two pointers, one moving at 1 space at a time, one moving at 2 spaces at a time.
+    - Why does this work?
+        - When the slow pointer enters the loop, the fast pointer is already in the loop. Let's say 
+            fast pointer is K distance from slow.
+        - After 1 iteration, distance between them is K + 1. Then 2nd iteration is K + 2.
+        - After N iterations, distance is K + N.
+- If the fast pointer meets the slow pointer, you know there's a cycle.
+- After meeting, you can have the fast pointer keep going until it hits the slow pointer. The number
+    of spaces traveled by the fast pointer is the size of the cycle.
+- To find the median of a sorted linked list, use a 1x pointer and a 2x pointer again. Once the 2x
+    pointer reaches the end, you know the slow pointer is at the median.
+- To find the beginning of the linked list, find the length of the cycle first.
+    Then start two pointers at the beginning, move one ahead by Length spaces. Then move both 1 by
+    1 until they meet.
