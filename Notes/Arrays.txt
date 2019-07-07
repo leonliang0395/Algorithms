@@ -1,0 +1,11 @@
+Sliding Window Technique
+- Push end pointer forward to make sum bigger.
+- Push start pointer forwrd to make sum smaller.
+
+Common Diff Technique
+- Keep track of each sum per index as a rolling sum as you iterate through the array.
+- When (currSum - target) is in the map, you've found the two indices for contiguous arr.
+
+DNF
+- Three Zones: Low, Mid and High
+- Swap with the zone pointers to fill up the zones.

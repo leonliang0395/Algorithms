@@ -1,0 +1,34 @@
+Binary Search
+- Make sure you use mid = start + (end - start) / 2 to avoid integer overflow.
+- If you're encountering duplicates, you will need to keep searching if mid - 1 is the same as mid.
+- If you're trying to find the nearest target, you will need to keep track of the closest mid encountered.
+
+BS: Cyclically Rotated Arrays Properties
+- Remember that the last element in the array gives you a lot of information.
+    - All elements that are rotated and came back around are > lastElement.
+    - All elements that have not rotated are < lastElement
+- Also, there should be exactly one element where the value dips. This is the end/beginning border.
+- This does NOT work if the array has duplicates. You will need to do O(N) if there are duplicates.
+
+BS: Looking for an element in a CRA
+- Binary search for the pivot element in O(log(n)) time.
+- If pivot element doesn't exist, do normal BS.
+- Otherwise, this pivot element represents the two sections to BST. Figure out which section the element belongs in
+    and just perform binary search on that section.
+
+BS: Looking for an element in a Unknown Length Array
+- Catch the out of bounds exception to find the end of the array
+- After finding end of Array, do regular BST
+- You can improve by checking between prevEnd and currEnd and seeing if the element is between there.
+
+BS: Finding Square Root of X
+- Do a binary search between 0 and X.
+- If mid * mid > x, search mid - 1.
+- If mid * mid < x, search mid + 1.
+
+BS: Finding peak of array
+- Basically do binary search with certain properties.
+    - If (v[mid] < v[mid + 1]) search (mid + 1, end)
+    - If (v[mid] < v[mid - 1]) search (start, mid - 1)
+    - If (mid == 0 or mid == size - 1 or (v[mid] >= v[mid - 1] && v[mid] >= v[mid + 1])
+        - In the case that mid is the same as both of its sides, then that's the peak, it's just a wide peak.

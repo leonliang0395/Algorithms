@@ -2,9 +2,100 @@
 #include <cstdlib>
 #include <algorithm>
 #include <vector>
-#include <pair>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
+
+template <typename T>
+void printStack(deque<T> s) {
+    for (int i = s.size() - 1; i >= 0; --i) {
+        cout << s[i] << " ";
+    }
+    cout << endl;
+}
+
+void printSentences(const string &str, int idx, const unordered_set<string> &dict, deque<string> &wordStack) {
+    // Base Case
+    if (idx >= str.length()) {
+        printStack(wordStack);
+        return;
+    }
+    // idx represents the first letter that we should try to form a word with.
+    // loop through the rest of the letters, checking the dictionary to see if we get a word.
+    for (int i = 1; i < str.length() - idx + 1; ++i) {
+        // Substr is a word
+        string subs = str.substr(idx, i);
+        if (dict.find(subs) != dict.end()) {
+            wordStack.push_front(subs);
+            printSentences(str, idx + i, dict, wordStack);
+            wordStack.pop_front();
+        }
+    }
+
+    return;
+}
+
+struct hash_pair { 
+    template <class T1, class T2> 
+    size_t operator()(const pair<T1, T2>& p) const
+    { 
+        auto hash1 = hash<T1>{}(p.first); 
+        auto hash2 = hash<T2>{}(p.second); 
+        return hash1 ^ hash2; 
+    } 
+}; 
+
+bool pathExistsFourDirectionsMemo(const vector<vector<int>> &maze, int row, int col, unordered_set<pair<int, int>, hash_pair> &s, unordered_map<pair<int, int>, bool, hash_pair> &m) {
+    // Base Case
+    if (row >= maze.size() || col >= maze[0].size() || row < 0 || col < 0 || maze[row][col] == 1) {
+        return false;
+    }
+    if (row == maze.size() - 1 && col == maze[0].size() - 1) {
+        return true;
+    }
+    
+    // Add to current path
+    s.insert(make_pair(row, col));
+
+    // Recurse
+    vector<pair<int, int>> nextSteps = {make_pair(row + 1, col), make_pair(row, col + 1), make_pair(row - 1, col), make_pair(row, col - 1)};
+    for (int i = 0; i < nextSteps.size(); ++i) {
+        
+        // make sure this next step isn't going to go in a cycle.
+        if (s.find(nextSteps[i]) == s.end()) {
+            
+            // check the memo for already known bad paths
+            if (m.find(nextSteps[i]) == m.end()) {
+    
+                if (pathExistsFourDirectionsMemo(maze, nextSteps[i].first, nextSteps[i].second, s, m)) {
+                    return true;
+                } else {
+                    m[nextSteps[i]] = false;
+                }
+                
+            }
+                
+        }
+
+    }
+    
+    s.erase(make_pair(row, col));
+    return false;
+}
+
+bool pathExistsTwoDirections(const vector<vector<int>> &maze, int row, int col) {
+    // Base Case
+    if (row >= maze.size() || col >= maze[0].size() || maze[row][col] == 1) {
+        return false;
+    }
+    if (row == maze.size() - 1 && col == maze[0].size() - 1) {
+        return true;
+    }
+
+    // Recurse down
+    return pathExistsTwoDirections(maze, row + 1, col) || pathExistsTwoDirections(maze, row, col + 1);
+}
 
 void printCoinCombinations(const vector<int> &coins, int startIdx, int target, deque<int> &buffer, int currSum) {
     // Termination Cases

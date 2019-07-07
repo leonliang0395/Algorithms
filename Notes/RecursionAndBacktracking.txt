@@ -1,0 +1,35 @@
+Auxiliary Buffer for Combination Problems
+- The idea is to have a buffer of size N, where N is the size of the combinations you need.
+1. Have a termination base case, usually when the buffer is full, log the combination.
+2. Find candidates that will go into the buffer.
+3. Fill the next buffer slot
+4. Recurse to fill next buffer slot.
+
+Auxiliary Buffer for Permutation Problems
+- Same idea as for Combination problems, but slightly different as in the step where you find candidates, you need
+    to basically loop through the whole array.
+
+    Q: Print all permuatations of length x
+    // Termination case
+    if (bufferIdx == buffer.size()) {
+        printBuffer
+        return;
+    }
+
+    // Find candidates
+    for (int i = 0; i < arr.size(); ++i) {
+        // Check if number is already in buffer. If not, add to buffer recursively.
+        if (inBuffer[arr[i]].find() == inBuffer.end()) {
+            // Put element in buffer
+            buffer[bufferIdx] = arr[i];
+            // Mark element as in buffer
+            inBuffer[arr[i]] = true;
+            // Recurse to next bufferIdx
+            doFunctionAgain with bufferIdx + 1
+
+            // After recursion is done, remove element in this instance of function from the isInBuffer array.
+            inBuffer[arr[i]] = false;
+        }
+    }
+
+Backtracking
