@@ -7,6 +7,111 @@
 
 using namespace std;
 
+bool queenInDiagonal(const vector<vector<int>> &board, int row, int col) {
+    // Check topleft-bottomright diagonal
+    int i = row - 1;
+    int j = col - 1;
+    while(i >= 0 && j >= 0) {
+        if (board[i][j] == 1) {
+            return true;
+        }
+        --i;
+        --j;
+    }
+
+    i = row + 1;
+    j = col + 1;
+    while(i < board.size() && j < board[i].size()) {
+        if (board[i][j] == 1) {
+            return true;
+        }
+        ++i;
+        ++j;
+    }
+
+    // Now check topRight - bottomLeft diagonal
+    i = row - 1;
+    j = col + 1;
+    while (i >= 0 && j < board[i].size()) {
+        if (board[i][j] == 1) {
+            return true;
+        }
+        --i;
+        ++j;
+    }
+
+    i = row + 1;
+    j = col - 1;
+    while (i < board.size() && j >= 0) {
+        if (board[i][j] == 1) {
+            return true;
+        }
+        ++i;
+        --j;
+    }
+
+    return false;
+}
+
+vector<pair<int, int>> getCandidateQueenSpots(const vector<vector<int>> &board, 
+                                                const vector<bool> &queenInRow,
+                                                const vector<bool> &queenInCol) {
+    vector<pair<int, int>> candidates;
+    for (int i = 0; i < board.size(); ++i) {
+        if (!queenInRow[i]) {
+            for (int j = 0; j < board[i].size(); ++j) {
+                if (!queenInCol[j]) {
+                    if (!queenInDiagonal(board, i, j)) {
+                        candidates.push_back(make_pair(i, j));
+                    }
+                }
+            }   
+        }  
+    }
+    return candidates;
+}
+
+bool NQueens (vector<vector<int>> &board, vector<bool> &queenInRow, vector<bool> &queenInCol, int N) {
+    // Each queen you place on the board will decrease the number of valid spaces for the next queen.
+    // The worst possible outcome is if you place n - 1 queens on the board and there are no longer any more
+    // valid spaces for a queen.
+    // In that case, you need to go to the n - 1 queen step and place it on a differrent valid space and try 
+    // again.
+
+    // Base Case: this call to the function has N of 0, so all queens must have been placed.
+    if (N == 0) {
+        return true;
+    }
+
+    // Retrieve candidate spots. If there are no valid candidate spots, return false.
+    vector<pair<int, int>> candidateSpots = getCandidateQueenSpots(board, queenInRow, queenInCol);
+    if (candidateSpots.empty()) {
+        return false;
+    }
+
+    // Iterate through the candidate spots
+    for (int i = 0; i < candidateSpots.size(); ++i) {
+        int r = candidateSpots[i].first;
+        int c = candidateSpots[i].second;
+
+        board[r][c] = 1;
+        queenInRow[r] = true;
+        queenInCol[c] = true;
+
+        if (NQueens(board, queenInRow, queenInCol, N - 1)) {
+            return true;
+        } else {
+            // After placing this queen, it seems somewhere in the next steps it failed, so try the next candidate.
+            board[r][c] = 0;
+            queenInRow[r] = false;
+            queenInCol[c] = false;
+        }
+    }
+
+    // All candidates have been iterated through, none were successful so return false.
+    return false;
+}
+
 pair<int, int> getNextCell(const vector<vector<int>> &board, int row, int col)
 {
     // Iterate for the remaining numbers in the row.
