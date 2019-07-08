@@ -20,3 +20,7 @@ Slow Pointer, Fast Pointer (Floyd's Algorithm)
 - To find the beginning of the linked list, find the length of the cycle first.
     Then start two pointers at the beginning, move one ahead by Length spaces. Then move both 1 by
     1 until they meet.
+
+Linked Hash Table
+- Essentially a Hash Table where the key is the Node data, and the value is a pointer to the node in the linked list.
+- This gives you fast lookup, and gives you ordering with the linked list.
