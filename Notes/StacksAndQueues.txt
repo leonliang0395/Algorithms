@@ -1,0 +1,7 @@
+Expression Evaluation
+- You'll have two stacks: one for operands and one for operators.
+- As you push operands annd operators, if you encounter an operand that has higher or equal precedence to 
+    the operand on top of the stack, you evaluate the operator on the top of the stack and push the result
+    to the operands. Then you check again if the operator on top of the stack has higher or equal precedence to 
+    the operator coming in. Repeat until there's lower precedence or you've run out of operators.
+

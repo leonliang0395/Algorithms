@@ -1,6 +1,6 @@
 Binary Search
 - Make sure you use mid = start + (end - start) / 2 to avoid integer overflow.
-- If you're encountering duplicates, you will need to keep searching if mid - 1 is the same as mid to find the first instance of mid.
+- If you're encountering duplicates and you want to find the first instance of the target, you will need to keep searching if mid - 1 is the same as mid 
 - If you're trying to find the nearest target, you will need to keep track of the closest mid value encountered.
 
 BS: Cyclically Rotated Arrays Properties
@@ -9,6 +9,7 @@ BS: Cyclically Rotated Arrays Properties
     - All elements that have not rotated are < lastElement
 - Also, there should be exactly one element where the value dips. This is the end/beginning border.
 - This does NOT work if the array has duplicates. You will need to do O(N) if there are duplicates.
+- Also, if mid < last element, mid -> last is sorted. If mid > last element, first -> mid is sorted.
 
 BS: Looking for an element in a CRA
 - Binary search for the pivot element in O(log(n)) time.
@@ -20,7 +21,9 @@ BS: Looking for an element in a CRA
     and just perform binary search on that section.
 
 BS: Looking for an element in a Unknown Length Array
-- Catch the out of bounds exception to find the end of the array
+- Catch the out of bounds exception to find the end of the array.
+    - You don't even need to find the exact end, you just need to see what is the most recent good end you tried,
+        and see if the target is less than that or greater than that.
 - After finding end of Array, do regular BST
 - You can improve by checking between prevEnd and currEnd and seeing if the element is between there.
 
@@ -33,5 +36,5 @@ BS: Finding peak of array
 - Basically do binary search with certain properties.
     - If (v[mid] < v[mid + 1]) search (mid + 1, end)
     - If (v[mid] < v[mid - 1]) search (start, mid - 1)
-    - If (mid == 0 or mid == size - 1 or (v[mid] >= v[mid - 1] && v[mid] >= v[mid + 1])
+    - If (mid == 0 or mid == size - 1 or (v[mid] >= v[mid - 1] && v[mid] >= v[mid + 1]) aka mid is start or end or has continuous peak.
         - In the case that mid is the same as both of its sides, then that's the peak, it's just a wide peak.
