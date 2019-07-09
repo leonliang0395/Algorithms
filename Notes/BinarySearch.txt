@@ -1,7 +1,7 @@
 Binary Search
 - Make sure you use mid = start + (end - start) / 2 to avoid integer overflow.
-- If you're encountering duplicates, you will need to keep searching if mid - 1 is the same as mid.
-- If you're trying to find the nearest target, you will need to keep track of the closest mid encountered.
+- If you're encountering duplicates, you will need to keep searching if mid - 1 is the same as mid to find the first instance of mid.
+- If you're trying to find the nearest target, you will need to keep track of the closest mid value encountered.
 
 BS: Cyclically Rotated Arrays Properties
 - Remember that the last element in the array gives you a lot of information.
@@ -12,6 +12,9 @@ BS: Cyclically Rotated Arrays Properties
 
 BS: Looking for an element in a CRA
 - Binary search for the pivot element in O(log(n)) time.
+    - If mid - 1 is greater than mid, you have your pivot.
+    - If mid is less than end element, search mid - 1.
+    - If mid is greater than end element, search mid + 1. 
 - If pivot element doesn't exist, do normal BS.
 - Otherwise, this pivot element represents the two sections to BST. Figure out which section the element belongs in
     and just perform binary search on that section.

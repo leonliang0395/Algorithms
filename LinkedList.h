@@ -2,6 +2,7 @@ template <typename T>
 struct Node {
   T data;
   Node *next;
+  Node *prev;
 };
 
 template <typename T>
@@ -17,5 +18,6 @@ class LinkedList {
     Node<T>* getTail();
     void append(Node<T>* n);
     void insert_front(Node<T>* n);
+    void popFront();
     void removeNode(Node<T>* n);
 };

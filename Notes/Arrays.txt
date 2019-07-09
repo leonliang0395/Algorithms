@@ -3,8 +3,8 @@ Sliding Window Technique
 - Push start pointer forwrd to make sum smaller.
 
 Common Diff Technique
-- Keep track of each sum per index as a rolling sum as you iterate through the array.
-- When (currSum - target) is in the map, you've found the two indices for contiguous arr.
+- Keep track of each sum per index as a rolling sum as you iterate through the array
+- When (currSum - target) is in the map, you've found the two indices for contiguous arr that sum to target.
 
 DNF
 - Three Zones: Low, Mid and High
