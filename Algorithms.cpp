@@ -7,6 +7,35 @@
 
 using namespace std;
 
+int maxTwoTrades(const vector<int> &arr) {
+    // Create the max to i vector
+    vector<int> maxToI(arr.size());
+    int maxProfitNow = 0;
+    int minSoFar = numeric_limits<int>::max();
+    for (int i = 0; i < arr.size(); ++i) {
+        minSoFar = min(minSoFar, arr[i]);
+        maxProfitNow = max(arr[i] - minSoFar, maxProfitNow);
+        maxToI[i] = maxProfitNow;
+    }
+
+    // Create the max from i vector
+    vector<int> maxFromI(arr.size());
+    maxProfitNow = 0;
+    int maxSoFar = numeric_limits<int>::min();
+    for (int i = arr.size() - 1; i >= 0; --i) {
+        maxSoFar = max(maxSoFar, arr[i]);
+        maxProfitNow = max(maxSoFar - arr[i], maxProfitNow);
+        maxFromI[i] = maxProfitNow;
+    }
+
+    int maxTwoTrades = 0;
+    for (int i = 0; i < arr.size(); ++i) {
+        maxTwoTrades = max(maxToI[i] + maxFromI[i], maxTwoTrades);
+    }
+
+    return maxTwoTrades;
+}
+
 pair<pair<int, int>, int> maxContiguousSubarray(const vector<int> &arr) {
     int maxSoFar = arr[0];
     int maxNow = arr[0];

@@ -16,3 +16,14 @@ Trim Strings
             return !std::isspace(ch);
         }).base(), s.end());
     }
+
+Find the profit of the best trade in stock
+    - Max Diff Technique
+    - Keep track of the minimum_price so far, and for each element, check if the difference between minimum and this element
+      is greater than the max profit so far.
+    - Also update minimum_price if you find a lower price.
+    
+Find the best two profits in an array of stock prices
+    - You essentially need to iterate through each element in the array.
+        - For each iteration, you have to check the best prices in the subarray before the element, and after the element.
+        - To do this, you need to have two functions to find the best price in subarr(0, i) and in subarr(i + 1, size).
