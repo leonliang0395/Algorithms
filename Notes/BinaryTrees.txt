@@ -1,6 +1,8 @@
 Binary Tree Properties
 - Balanced Tree
   - Depth of Leaf nodes <= 1 between each other.
+  - A binary tree with height h can have a maximum of 2^(h+1) - 1 nodes. 
+    This will happen if all nodes have 2 nodes.
 
 - Preorder Traversal
   - print data
@@ -16,3 +18,10 @@ Binary Tree Properties
   - visit left
   - visit right
   - print data
+
+Top To Bottom Approach
+- Evaluate the result for the current node, then pass it on to left and right nodes to evaluate 
+  for themselves. There's usually a variable that holds the result. 
+- Pass the variables down to the children nodes to update. After entire tree is traversed, the 
+  variable will hold the result.
+

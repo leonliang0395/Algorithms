@@ -27,3 +27,9 @@ Find the best two profits in an array of stock prices
     - You essentially need to iterate through each element in the array.
         - For each iteration, you have to check the best prices in the subarray before the element, and after the element.
         - To do this, you need to have two functions to find the best price in subarr(0, i) and in subarr(i + 1, size).
+
+Lowest Common Ancestor of a Binary Tree
+- This assumes that nodes have a parent pointer
+- Find the depth of the two nodes.
+- Bring the node that's deeper, up to the same depth of the other node.
+- Then move both up at the same time until they meet. That is the LCA.
