@@ -1,0 +1,18 @@
+Binary Tree Properties
+- Balanced Tree
+  - Depth of Leaf nodes <= 1 between each other.
+
+- Preorder Traversal
+  - print data
+  - visit left
+  - visit right
+
+- Inorder Traversal
+  - visit left
+  - print data
+  - visit right
+
+- Postorder Traversal
+  - visit left
+  - visit right
+  - print data
