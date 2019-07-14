@@ -33,3 +33,19 @@ Lowest Common Ancestor of a Binary Tree
 - Find the depth of the two nodes.
 - Bring the node that's deeper, up to the same depth of the other node.
 - Then move both up at the same time until they meet. That is the LCA.
+
+Lowest Common Ancestor of a Binary Tree Without Parent Pointer 
+- From the top, you check if the current node is the 1st or 2nd node.
+- If it is, you return the current node.
+- Then you make two recursive calls to left and right subtree. If they return a node, then the 1st or 2nd node is in 
+  one of the subtrees. 
+- Then you check if the left and right are not nullptrs, and if they are not, you found the LCA.
+- If you've only found one of the subtrees, you return that node so it propagates up the stack. Eventually the
+  earlier call to the function is expecting a node being found in their subtree.
+
+Binary Tree Reconstruction from Inorder and Preorder
+- The first element in the preorder traversal is the root.
+- Find the index of the root in the inorder traversal.
+- Then recursively pass the left side of the inorder, and pass the corresponding section of preorder to the left side.
+- Also recursively pass the right side of the inorder, and pass the corresponding section of preorder to the right side.
+- This is O(N^2) because you need to 

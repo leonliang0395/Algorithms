@@ -6,6 +6,7 @@
 using namespace std;
 
 struct TreeNode {
+  TreeNode* parent;
   TreeNode* left;
   TreeNode* right;
   int data;
@@ -105,6 +106,88 @@ class treeDiameter {
   }
 };
 
-TreeNode* lowestCommonAncestor(TreeNode* a, TreeNode* b) {
-  
+int depthOfLCA(TreeNode* root, TreeNode* target, int level) {
+  if (!root) return 0;
+
+  if (root == target) return level;
+
+  // check left subtree, pass on the current level.
+  int leftTree = depthOfLCA(root->left, target, level + 1);
+
+  if (leftTree != 0) {
+    return leftTree;
+  }
+
+  int rightTree = depthOfLCA(root->right, target, level + 1);
+
+  return rightTree;
+}
+
+TreeNode* lowestCommonAncestorWithParent(TreeNode* root, TreeNode* a, TreeNode* b) {
+  if (!root) return nullptr;
+  if (!a) return b;
+  if (!b) return a;
+
+  int aDepth = depthOfLCA(root, a, 0);
+  int bDepth = depthOfLCA(root, b, 0);
+
+  int depthDiff = abs(aDepth - bDepth);
+
+  for (int i = 0; i < depthDiff; ++i) {
+    if (aDepth < bDepth) {
+      b = b->parent;
+    }
+    if (bDepth < aDepth) {
+      a = a->parent;
+    }
+  }
+
+  while (a != b) {
+    a = a->parent;
+    b = b->parent;
+  }
+
+  return a;
+
+}
+
+TreeNode* LCAWithoutParent(TreeNode* root, TreeNode* a, TreeNode* b) {
+  if (!root) return nullptr; 
+
+  if (root == a || root == b) return root;
+
+  TreeNode* left = LCAWithoutParent(root->left, a, b);
+  TreeNode* right = LCAWithoutParent(root->right, a, b);
+
+  // If you've found a and b, then this node is the LCA.
+  if (left && right) {
+    return root;
+  }
+
+  // If you've only found one of them
+  if (left) {
+    return left;
+  }
+
+  if (right) {
+    return right;
+  }
+
+  return nullptr;
+}
+
+// Each recursive call, construct the tree from [preorderStart, preorderEnd] and [inorderStart, inorderEnd]
+TreeNode* treeReconstruction(const vector<int> &inorder, const vector<int> &preorder, int preorderStart, int preorderEnd, int inorderStart, int inorderEnd) {
+  // Get root value from beginning of preorder 
+  TreeNode* n = new TreeNode();
+  n->data = preorder[preorderStart];
+
+  // Find index of root in inorder
+  auto it = find(inorder.begin(), inorder.end(), n->data);
+  int idx = distance(inorder.begin(), it);
+
+  n->left = treeReconstruction(inorder, preorder, preorderStart + 1, preorderStart + (idx - inorderStart), inorderStart, idx - 1);
+  n->right = treeReconstruction(inorder, preorder, preorderStart + 1 + (idx - inorderStart), preorderEnd, idx + 1, inorderEnd);
+
+  return n;
 }
