@@ -7,6 +7,26 @@
 
 using namespace std;
 
+void rotateLayer(vector<vector<int>> &a , int start, int end) {
+    for (int cur = 0; start + cur < end; ++cur) {
+        int top = a[start][start + cur]; // save the top
+        a[start][start + cur] = a[end - cur][start]; // left to top
+        a[end - cur][start] = a[end][end - cur]; // bottom to left
+        a[end][end - cur] = a[start + cur][end];// right to bottom
+        a[start + cur][end] = top;// top to right
+    }
+}
+
+void rotateMatrix(vector<vector<int>> &a) {
+    if (a.empty() || a.size() != a[0].size()) {
+        return;
+    }
+
+    for (int layer = 0; layer < a.size() / 2; ++layer) {
+        rotateLayer(a, layer, a.size() - 1 - layer);
+    }
+}
+
 int maxTwoTrades(const vector<int> &arr) {
     // Create the max to i vector
     vector<int> maxToI(arr.size());

@@ -48,4 +48,20 @@ Binary Tree Reconstruction from Inorder and Preorder
 - Find the index of the root in the inorder traversal.
 - Then recursively pass the left side of the inorder, and pass the corresponding section of preorder to the left side.
 - Also recursively pass the right side of the inorder, and pass the corresponding section of preorder to the right side.
-- This is O(N^2) because you need to 
+
+Rotating a 2D Array
+- Rotate layer by layer. Layers = size / 2.
+- For each layer, you iterate through the number of elements on each side.
+- For each element, you will take a copy of the top element, then move the left to top, bottom to left, right to bottom, top to right.
+
+Ways to climb up to N steps
+Bottom Up:
+- Intervals are 1, 3, and 5.
+- By going bottom up, you can figure out how many steps to get to step 1, 2, 3, etc.
+- a[i + 1] = a[i + 1] + a[i], a[i + 3] = a[i + 3] + a[i]. etc.
+- Perform this from 0 to a.size() - 1.
+Top Down:
+- a[i] = a[i - 1] + a[i - 3] + a[i - 5]
+- So, iterate through 0 to a.size() - 1.
+- In each iteration, you need the values of a[i - 1], a[i - 3], and a[i - 5].
+- Initialize a[0] to 1.
