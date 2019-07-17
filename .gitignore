@@ -1,3 +1,5 @@
 Makefile
 *.o
 *.vscode
+*.gch
+*.exe

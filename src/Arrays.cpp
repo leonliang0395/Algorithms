@@ -133,3 +133,7 @@ void mergesort(vector<int>& vec, vector<int>& helper, int low, int high) {
         merge(vec, helper, low, middle, high);
     }
 }
+
+int main() {
+    return 0;
+}
