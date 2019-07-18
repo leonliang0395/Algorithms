@@ -2,15 +2,9 @@
 #include <vector>
 #include <deque>
 #include <algorithm>
+#include "GraphsAndTrees.h"
 
 using namespace std;
-
-struct TreeNode {
-  TreeNode* parent;
-  TreeNode* left;
-  TreeNode* right;
-  int data;
-};
 
 void recursiveInOrderTraversal(TreeNode* head) {
   if (!head) return;
