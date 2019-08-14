@@ -1,0 +1,27 @@
+- Tell me your biggest weakness as an engineer.
+My biggest weakness is not speaking up during team meetings. 
+I tend to defer to the opinions of the more senior developerson the team, since I know that they have more context, knowledge, and experience.
+We have weekly design reviews and sprint reviews where we show off our work.
+I find myself never truly confident in presenting anything, and I really tend to defer to the senior engineers to present.
+I've definitely brought this up with my current manager and my past manager, and in my opinion, there could be a couple reasons for this.
+I simply am really early in career on a super business logic heavy team where even people who have been on it for a couple years still only really know like 25% of the project.
+I also definitely have some sort of impostor syndrome, I'm always double checking my work, doubting my code, even if it runs great with all my unit tests. Sometimes my being careful really slows me down.
+
+- Describe a tricky bug you’ve encountered.
+
+
+- What’s the biggest project you’ve shipped?
+FSA is a huge project.
+Unfortunately we were given a deadline that would likely compromise our quality
+Mixed messages of following quality, but needing to hit that deadline
+
+- What’s your favorite programming language? Why?
+I really like C++ because it's my first language.
+I learned it in college, and I really liked how declarative and explicit it is about everything,
+The code is clear, although can be really verbose.
+I have mixed feelings about the memory management. Managing it yourself gives you a lot of control, but you need to be really careful. Then working with scala with GC, I never realized I didn't worry about memory.
+
+- How do you overcome interpersonal conflicts with coworkers?
+Bring it up in retro.
+Ask for a one on one with the person.
+Try to understand where they're coming from and why they are so passionate and angry.
