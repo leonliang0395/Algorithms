@@ -21,6 +21,36 @@ Trim Strings
         );
     }
 
+DNF Problem
+    - 3 Zones: low, middle and high.
+    - low and middle pointers start from beginning
+    - high pointer is at the end.
+    - the zone between mid and high is the undecided.
+    - the zone between high and the end is 3.
+    - the zone between low and mid is 2.
+    - the zone between begin and low is 1.
+
+Maximum Contiguous Subarray (Subarray within array with largest sum)
+    - Iterate through array once.
+    - Keep track of maxSoFar, maxNow.
+    - Keep track of start and end of interval representing maxSoFar.
+    - Start tracking a new interval when maxNow is < arr[i].
+
+Maximum Profit from Two Trades (buy sell, buy sell)
+    - O(N)
+    - Create a vector, from left to right, of the maximum profit to i.
+    - Create another vector, from right to left, maximum profit from i.
+    - The idea is that at any point i, you can see the maximum profit before and after this point.
+    - Then to get the maximum of two trades, iterate through both arrays, and add both indices and find the max.
+
+Rotate 2D Array
+    - Rotate layer by layer.
+    - Save the top layer.
+    - Copy left to top, then bottom to left, then right to bottom, then top to right.
+    - Repeat for each layer.
+    - # of layers = vec.size() / 2.
+    - Shave off the front and back by 1 each time when going into next layers.
+
 Find the profit of the best trade in stock
     - Max Diff Technique
     - Keep track of the minimum_price so far, and for each element, check if the difference between minimum and this element

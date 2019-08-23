@@ -6,6 +6,56 @@
 
 using namespace std;
 
+/* What is the largest element in a binary tree?
+    It is the right most element.
+   Then what is the second largest?
+    It is the next-right most element.
+   This can manifest in a number of cases.
+
+   1. rightMost-> left -> right until null
+   2. if (!rightMost->left) rightMost-> Parent
+   3. if (!rightMost->Parent) then this is the only node in the tree.
+
+   Corner Cases:
+   0. Empty Tree
+   1. One Element Tree
+   2. Two Element Tree to the left/right
+   3. Linked List Tree to the left
+   4. Linked List Tree to the right
+
+*/
+
+int secondLargestElementInBinarySearchTree(TreeNode* head) {
+  if (!head) return -1;
+  if (!head->right && !head->left) return head->data;
+
+  // Find the rightmost node, keep track of the parent of rightmost.
+  TreeNode* rightMost = head;
+  TreeNode* rightMostParent = head;
+  while (rightMost->right) {
+    rightMostParent = rightMost;
+    rightMost = rightMost->right;
+  }
+
+  // First check rightMost to see if there is a left
+  // Then go as far right as possible from rightMost's left.
+  TreeNode* leftChecker = nullptr;
+  if (rightMost->left) 
+  {
+    leftChecker = rightMost->left;
+  } 
+  else 
+  {
+    return rightMostParent->data;
+  }
+
+  while (leftChecker->right) {
+    leftChecker = leftChecker->right;
+  }
+
+  return leftChecker->data;
+}
+
 void recursiveInOrderTraversal(TreeNode* head) {
   if (!head) return;
 
