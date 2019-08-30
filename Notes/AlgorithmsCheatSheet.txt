@@ -1,3 +1,12 @@
+Bit Manipulation Tips:
+  - Use XOR if you need to cancel out matching numbers.
+  - If you need to divide by 2, right shift.
+  - If you need to multiply by 2, left shift.
+  - Check for power of two: 
+    If a # is a power of two, it only has 1 bit = 1.
+    Subtract 1 from the number
+    if originalNumber & subtractedNumber = 0, then it's a power of two.
+
 Longest Palindromic Substring
 O(N^2) Time O(1) Space:
   - For each letter, expand left + right till you find the biggest substring.
@@ -69,7 +78,7 @@ Lowest Common Ancestor of a Binary Tree
 - Then move both up at the same time until they meet. That is the LCA.
 
 Lowest Common Ancestor of a Binary Tree Without Parent Pointer 
-- From the top, you check if the current node is the 1st or 2nd node.
+- From the top using BFS, you check if the current node is the 1st or 2nd node.
 - If it is, you return the current node.
 - Then you make two recursive calls to left and right subtree. If they return a node, then the 1st or 2nd node is in 
   one of the subtrees. 

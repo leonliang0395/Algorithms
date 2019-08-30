@@ -13,30 +13,30 @@ LinkedList<T>::LinkedList() : head(nullptr),
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-    Node *current = head;
+    ListNode *current = head;
     while (current != 0)
     {
-        Node *nextNode = current->next;
+        ListNode *nextListNode = current->next;
         delete current;
-        current = nextNode;
+        current = nextListNode;
     }
     head = 0;
 }
 
 template <typename T>
-Node<T> *LinkedList<T>::getHead()
+ListNode<T> *LinkedList<T>::getHead()
 {
     return head;
 }
 
 template <typename T>
-Node<T> *LinkedList<T>::getTail()
+ListNode<T> *LinkedList<T>::getTail()
 {
     return tail;
 }
 
 template <typename T>
-void LinkedList<T>::append(Node<T> *n)
+void LinkedList<T>::append(ListNode<T> *n)
 {
     if (head == 0)
     {
@@ -51,7 +51,7 @@ void LinkedList<T>::append(Node<T> *n)
 }
 
 template <typename T>
-void LinkedList<T>::insert_front(Node<T> *n)
+void LinkedList<T>::insert_front(ListNode<T> *n)
 {
     if (head == 0)
     {
@@ -66,7 +66,7 @@ void LinkedList<T>::insert_front(Node<T> *n)
 }
 
 template <typename T>
-void LinkedList<T>::removeNode(Node<T> *n)
+void LinkedList<T>::removeListNode(ListNode<T> *n)
 {
     if (head == tail) {
         head = tail = nullptr;
@@ -95,13 +95,68 @@ template <typename T>
 void LinkedList<T>::popFront() 
 {
     if (head != 0) {
-        removeNode(head);
+        removeListNode(head);
     }    
+}
+
+ListNode<int>* mergeTwoLists(ListNode<int>* A, ListNode<int>* B) {
+    ListNode<int>* mergedHead = nullptr;
+    ListNode<int>* current = nullptr;
+    
+    if (!A && B) {
+        return B;
+    }
+    
+    if (A && !B) {
+        return A;
+    }
+    
+    // Initialize the first ListNode.
+    if (A && B) {
+        if (A->val < B->val) {
+            mergedHead = current = new ListNode<int>(A->val);
+            A = A->next;
+        } else {
+            mergedHead = current = new ListNode<int>(B->val);
+            B = B->next;
+        }
+    } else {
+        cout << "A or B is empty" << endl;
+    }
+    
+    while (A && B) {
+        if (A->val < B->val) {
+            current->next = new ListNode<int>(A->val);
+            current = current->next;
+            A = A->next;
+        } else {
+            current->next = new ListNode<int>(B->val);
+            current = current->next;
+        }
+    }
+    
+    while (A) {
+        current->next = new ListNode<int>(A->val);
+        current = current->next;
+        A = A->next;
+    }
+    
+    while (B) {
+        current->next = new ListNode<int>(B->val);
+        current = current->next;
+        B = B->next;
+    }
+    
+    return mergedHead;
+}
+
+ListNode<int>* mergeKLists(vector<ListNode<int>*>& lists) {
+    
 }
 
 pair<LinkedList<int>, LinkedList<int>> oddEvenLinkedLists(LinkedList<int> list)
 {
-    Node<int> *current = list.getHead();
+    ListNode<int> *current = list.getHead();
 
     LinkedList<int> odd;
     LinkedList<int> even;
@@ -109,15 +164,15 @@ pair<LinkedList<int>, LinkedList<int>> oddEvenLinkedLists(LinkedList<int> list)
     int counter = 1;
     while (current != nullptr)
     {
-        Node<int> *newNode = new Node<int>();
-        newNode->data = current->data;
+        ListNode<int> *newListNode = new ListNode<int>();
+        newListNode->data = current->data;
         if (counter % 2 == 1)
         {
-            odd.append(newNode);
+            odd.append(newListNode);
         }
         else
         {
-            even.append(newNode);
+            even.append(newListNode);
         }
         ++counter;
         current = current->next;
