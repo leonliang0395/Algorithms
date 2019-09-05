@@ -8,7 +8,12 @@ I simply am really early in career on a super business logic heavy team where ev
 I also definitely have some sort of impostor syndrome, I'm always double checking my work, doubting my code, even if it runs great with all my unit tests. Sometimes my being careful really slows me down.
 
 - Describe a tricky bug you’ve encountered.
-
+SQL job intermittent failure. Will fail the same job in only one server and not the others.
+We would check CPU usage, memory usage.
+We would check logs and running processes
+We could only debug as it was failing, logs would not give us anything
+This was during like 10PM at night when it was my on-call rotation.
+Narrowed it down to looking at other running processes, found one process that was locking.
 
 - What’s the biggest project you’ve shipped?
 FSA is a huge project.
@@ -25,3 +30,31 @@ I have mixed feelings about the memory management. Managing it yourself gives yo
 Bring it up in retro.
 Ask for a one on one with the person.
 Try to understand where they're coming from and why they are so passionate and angry.
+
+
+
+MSSales
+
+- Revenue Reporting system
+- Data Pipeline using Spark and Scala
+- Orchestration mainly using Azure Automation Powershell Runbooks
+- Ingest data from multiple sources, onprem, cosmos, blob.
+
+- Worked on sharding of data using fiscal months. Worked specifically on the orchestration,
+considering rerunnability of the runbook, exponential retries, distribution of fiscal months.
+
+- Worked on new Azure Launches, worked with C+E team, designed new ingestion pipeline and processing given strict deadlines
+	- trade off between utilizing old processing in warehouse vs taking time to do more processing in the cloud
+	- worked on cleaning data coming in from upstream sources, took into account dedupe, version order checking, orchestration between multiple parts of pipeline
+	- considered factors for performance including transfer of data from onpremise to cloud, from cosmos to sql iaas, did POCs with sample data sizes, researched various data 			pull mechanisms.
+	- livesite and devops was very important to our team, so I understood fully the pain of having to deal with infrastructure issues, azure services issues, and learned 
+		ways to help mitigate those alerts
+	- telemetry is super important, have to get it from the beginning, place alerts on LA, app insights, etc.
+	- security is paramount, take advantage of keyvault, credscan, gated checkins, fortify builds. doing it earlier will help in the long run.
+	- CI/CD makes a developer's life infinitely more enjoyable.
+		- nightly build run automatically, or running build taking however many changes are available when it's ready
+		- PR builds run only changed modules
+		- test cases for literally anything, from powershell to C# code.
+		- master is develop, use same release, different environments
+		- set up lower environments beforehand.
+		- set up local test env

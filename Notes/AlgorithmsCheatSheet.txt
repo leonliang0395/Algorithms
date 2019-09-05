@@ -1,3 +1,12 @@
+Bit Manipulation Tips:
+  - Use XOR if you need to cancel out matching numbers.
+  - If you need to divide by 2, right shift.
+  - If you need to multiply by 2, left shift.
+  - Check for power of two: 
+    If a # is a power of two, it only has 1 bit = 1.
+    Subtract 1 from the number
+    if originalNumber & subtractedNumber = 0, then it's a power of two.
+
 Longest Palindromic Substring
 O(N^2) Time O(1) Space:
   - For each letter, expand left + right till you find the biggest substring.
@@ -21,6 +30,36 @@ Trim Strings
         );
     }
 
+DNF Problem
+    - 3 Zones: low, middle and high.
+    - low and middle pointers start from beginning
+    - high pointer is at the end.
+    - the zone between mid and high is the undecided.
+    - the zone between high and the end is 3.
+    - the zone between low and mid is 2.
+    - the zone between begin and low is 1.
+
+Maximum Contiguous Subarray (Subarray within array with largest sum)
+    - Iterate through array once.
+    - Keep track of maxSoFar, maxNow.
+    - Keep track of start and end of interval representing maxSoFar.
+    - Start tracking a new interval when maxNow is < arr[i].
+
+Maximum Profit from Two Trades (buy sell, buy sell)
+    - O(N)
+    - Create a vector, from left to right, of the maximum profit to i.
+    - Create another vector, from right to left, maximum profit from i.
+    - The idea is that at any point i, you can see the maximum profit before and after this point.
+    - Then to get the maximum of two trades, iterate through both arrays, and add both indices and find the max.
+
+Rotate 2D Array
+    - Rotate layer by layer.
+    - Save the top layer.
+    - Copy left to top, then bottom to left, then right to bottom, then top to right.
+    - Repeat for each layer.
+    - # of layers = vec.size() / 2.
+    - Shave off the front and back by 1 each time when going into next layers.
+
 Find the profit of the best trade in stock
     - Max Diff Technique
     - Keep track of the minimum_price so far, and for each element, check if the difference between minimum and this element
@@ -39,7 +78,7 @@ Lowest Common Ancestor of a Binary Tree
 - Then move both up at the same time until they meet. That is the LCA.
 
 Lowest Common Ancestor of a Binary Tree Without Parent Pointer 
-- From the top, you check if the current node is the 1st or 2nd node.
+- From the top using BFS, you check if the current node is the 1st or 2nd node.
 - If it is, you return the current node.
 - Then you make two recursive calls to left and right subtree. If they return a node, then the 1st or 2nd node is in 
   one of the subtrees. 

@@ -1,23 +1,23 @@
 template <typename T>
-struct Node {
+struct ListNode {
   T data;
-  Node *next;
-  Node *prev;
+  ListNode *next;
+  ListNode *prev;
 };
 
 template <typename T>
 class LinkedList {
   private:
-    Node<T>* head;
-    Node<T>* tail;
+    ListNode<T>* head;
+    ListNode<T>* tail;
   
   public:
     LinkedList::LinkedList();
     LinkedList::~LinkedList();
-    Node<T>* getHead();
-    Node<T>* getTail();
-    void append(Node<T>* n);
-    void insert_front(Node<T>* n);
+    ListNode<T>* getHead();
+    ListNode<T>* getTail();
+    void append(ListNode<T>* n);
+    void insert_front(ListNode<T>* n);
     void popFront();
-    void removeNode(Node<T>* n);
+    void removeListNode(ListNode<T>* n);
 };
